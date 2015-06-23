@@ -5,6 +5,8 @@ package br.com.nmsystems.toolbox;
  */
 public class Util {
 
+
+    // Metodo para teste Inicial da Biblioteca
     public static String mostrarValor(String parametro){
         return parametro;
     }
