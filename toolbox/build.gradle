@@ -4,16 +4,16 @@ ext {
     bintrayRepo = 'maven'
     bintrayName = 'toolbox'
 
-    publishedGroupId = 'br.com.nmsystems.nmlibrary'
+    publishedGroupId = 'br.com.nmsystems.nmlibrarydemo'
     libraryName = 'toolbox'
     artifact = 'toolbox'
 
-    libraryDescription = 'ToolBox Library'
+    libraryDescription = 'NM Library Demo'
 
     siteUrl = 'https://github.com/NeonHugo/NMLibraryDemo'
     gitUrl = 'https://github.com/NeonHugo/NMLibraryDemo.git'
 
-    libraryVersion = '0.0.1'
+    libraryVersion = '0.0.2'
 
     developerId = 'neonhugo'
     developerName = 'N.Hugo'
@@ -23,7 +23,6 @@ ext {
     licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
     allLicenses = ["Apache-2.0"]
 }
-
 
 android {
     compileSdkVersion 22
@@ -48,9 +47,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.0'
 }
 
-//apply from: 'https://raw.githubusercontent.com/neonhugo/JCenter/master/installv1.gradle'
-//apply from: 'https://raw.githubusercontent.com/neonhugo/JCenter/master/bintrayv1.gradle'
-//
 apply plugin: 'com.jfrog.bintray'
 
 version = libraryVersion
@@ -94,8 +90,11 @@ bintray {
         publicDownloadNumbers = true
         version {
             desc = libraryDescription
+            gpg {
+                sign = true //Determines whether to GPG sign the files. The default is false
+                passphrase = properties.getProperty("bintray.gpg.password")
+                //Optional. The passphrase for GPG signing'
+            }
         }
     }
 }
-
-
