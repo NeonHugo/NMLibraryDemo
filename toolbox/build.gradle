@@ -1,5 +1,32 @@
 apply plugin: 'com.android.library'
 
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'nm-library-demo'
+
+    publishedGroupId = 'br.com.nmsystems'
+    libraryName = 'NMLibraryDemo'
+    artifact = 'nm-library-demo'
+
+    libraryDescription = 'NM Library Demo'
+
+    siteUrl = 'https://github.com/NeonHugo/NMLibraryDemo'
+    gitUrl = 'https://github.com/NeonHugo/NMLibraryDemo.git'
+
+    libraryVersion = '0.0.1'
+
+    developerId = 'neonhugo'
+    developerName = 'N.Hugo'
+    developerEmail = 'neonhugo@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+apply from: 'https://raw.githubusercontent.com/neonhugo/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/neonhugo/JCenter/master/bintrayv1.gradle'
+
 android {
     compileSdkVersion 22
     buildToolsVersion "23.0.0 rc2"
