@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
 
 ext {
     bintrayRepo = 'maven'
@@ -13,7 +15,7 @@ ext {
     siteUrl = 'https://github.com/NeonHugo/NMLibraryDemo'
     gitUrl = 'https://github.com/NeonHugo/NMLibraryDemo.git'
 
-    libraryVersion = '0.0.2'
+    libraryVersion = '0.0.4'
 
     developerId = 'neonhugo'
     developerName = 'N.Hugo'
@@ -47,54 +49,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.0'
 }
 
-apply plugin: 'com.jfrog.bintray'
+apply from: 'https://raw.githubusercontent.com/neonhugo/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/neonhugo/JCenter/master/bintrayv1.gradle'
 
-version = libraryVersion
 
-task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
-}
-
-task javadoc(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-artifacts {
-    archives javadocJar
-    archives sourcesJar
-}
-
-// Bintray
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
-
-bintray {
-    user = properties.getProperty("bintray.user")
-    key = properties.getProperty("bintray.apikey")
-
-    configurations = ['archives']
-    pkg {
-        repo = bintrayRepo
-        name = bintrayName
-        desc = libraryDescription
-        websiteUrl = siteUrl
-        vcsUrl = gitUrl
-        licenses = allLicenses
-        publish = true
-        publicDownloadNumbers = true
-        version {
-            desc = libraryDescription
-            gpg {
-                sign = true //Determines whether to GPG sign the files. The default is false
-                passphrase = properties.getProperty("bintray.gpg.password")
-                //Optional. The passphrase for GPG signing'
-            }
-        }
-    }
-}
